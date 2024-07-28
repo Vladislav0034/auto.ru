@@ -1,12 +1,12 @@
 import type React from 'react';
 import { useEffect } from 'react';
-import { /* createAutoThunk, deleteAutoThunk, editAutoThunk, */ getAutosThunk } from '../../redux/Autos/AutoAsyncActions';
+import {  createAutoThunk, deleteAutoThunk, editAutoThunk, getAutosThunk } from '../../redux/Autos/AutoAsyncActions';
 import type { EditAutoType, AutoType } from '../../types/AutoTypes';
 import { useAppDispatch, useAppSelector } from './reduxHooks';
 
 export default function useAutos(): {
-  tasks: AutoType[];
-  TasksSubmitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
+  autos: AutoType[];
+  AutosSubmitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
   deleteHandler: (id: AutoType['id']) => void
   editHandler: ( obj: EditAutoType) => void
 } {
@@ -17,19 +17,19 @@ export default function useAutos(): {
     void dispatch(getAutosThunk());
   }, [dispatch]);
 
-  /* const TasksSubmitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
+   const AutosSubmitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget)) as unknown as TaskType;
-    void dispatch(createTaskThunk(data));
+    const data = Object.fromEntries(new FormData(e.currentTarget)) as unknown as AutoType;
+    void dispatch(createAutoThunk(data));
   };
 
-  const deleteHandler = (id: TaskType['id']): void => {
-    void dispatch(deleteTaskThunk(id));
+  const deleteHandler = (id: AutoType['id']): void => {
+    void dispatch(deleteAutoThunk(id));
   }
 
-  const editHandler = ( obj: EditTaskType): void => {
-    void dispatch(editTaskThunk(obj));
-  } */
+  const editHandler = ( obj: EditAutoType): void => {
+    void dispatch(editAutoThunk(obj));
+  } 
 
-  return { autos /* , TasksSubmitHandler, deleteHandler, editHandler */ };
+  return { autos , AutosSubmitHandler, deleteHandler, editHandler  };
 }

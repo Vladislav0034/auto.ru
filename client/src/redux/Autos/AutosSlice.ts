@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { AutoType } from '../../types/AutoTypes';
-import { /* createTaskThunk, deleteTaskThunk, editTaskThunk, */getAutosThunk } from './AutoAsyncActions';
+import { createAutoThunk, deleteAutoThunk, editAutoThunk, getAutosThunk } from './AutoAsyncActions';
 
 type InitialStateType = {
   data: AutoType[];
@@ -19,22 +19,22 @@ const AutosSlice = createSlice({
       state.data = payload;
     });
 
-    /* builder.addCase(createTaskThunk.fulfilled, (state, { payload }) => {
+     builder.addCase(createAutoThunk.fulfilled, (state, { payload }) => {
       state.data.push(payload);
-    }); */
+    }); 
 
-   /* builder.addCase(deleteTaskThunk.fulfilled, (state, { payload }) => {
+    builder.addCase(deleteAutoThunk.fulfilled, (state, { payload }) => {
       state.data = state.data.filter((el) => el.id !== payload);
-    }); */
+    }); 
 
-   /* builder.addCase(editTaskThunk.fulfilled, (state, { payload }) => {
+    builder.addCase(editAutoThunk.fulfilled, (state, { payload }) => {
       state.data = state.data.map((el) => {
         if (el.id === payload.id) {
           return payload;
         }
         return el;
       }); 
-    }); */
+    }); 
   },
 });
 

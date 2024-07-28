@@ -2,8 +2,8 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const autoRouter = require('./routes/autoRoutes');
-const authRouter = require('./routes/auth.router');
-const tokenRouter = require('./routes/token.router');
+const authRouter = require('./routes/authRouter');
+const tokenRouter = require('./routes/tokenRouter');
 
 const app = express();
 

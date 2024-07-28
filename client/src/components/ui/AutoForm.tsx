@@ -12,24 +12,24 @@ import {
 import type { AutoDataType } from '../../types/AutoTypes';
 
 type PropsType = {
-  TasksSubmitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
+  AutosSubmitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
-export default function AutoForm({ TasksSubmitHandler }: PropsType): JSX.Element {
+export default function AutoForm({ AutosSubmitHandler }: PropsType): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
 
-  const wrappedTasksSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    TasksSubmitHandler(e);
+  const wrappedAutosSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    AutosSubmitHandler(e);
     closeModal();
   }
 
   return (
     <>
-      <Button onClick={openModal} colorScheme="blue" mt={8} mb={8}>Добавить Задачу</Button>
+      <Button onClick={openModal} colorScheme="red" mt={8} mb={8}>Добавить автомобиль</Button>
 
       <Modal isOpen={isOpen} onClose={closeModal}>
         <ModalOverlay />
@@ -37,14 +37,15 @@ export default function AutoForm({ TasksSubmitHandler }: PropsType): JSX.Element
           <ModalHeader>Добавить новую задачу</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Box onSubmit={wrappedTasksSubmitHandler} as="form" mt={3}>
+            <Box onSubmit={wrappedAutosSubmitHandler} as="form" mt={3}>
               <Stack spacing={3}>
-                <Input name="name" placeholder="name" size="md" />
-                <Input name="description" placeholder="description" size="md" />
-                <Input name="deadlines" placeholder="deadlines" size="md" />
+                <Input name="modelCar" placeholder="модель" size="md" />
+                <Input name="yearCar" placeholder="год выпуска" size="md" />
+                <Input name="mileage" placeholder="пробег" size="md" />
                 <Input name="image" placeholder="image" size="md" />
-                <Input name="status" placeholder="status" size="md" />
-                <Button type="submit" colorScheme="green">
+                <Input name="cost" placeholder="цена" size="md" />
+                <Input name="description" placeholder="описание" size="md" />
+                <Button type="submit" colorScheme="red">
                   Добавить Задачу
                 </Button>
               </Stack>
@@ -52,7 +53,7 @@ export default function AutoForm({ TasksSubmitHandler }: PropsType): JSX.Element
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={closeModal}>
+            <Button colorScheme="gray" mr={3} onClick={closeModal}>
               Закрыть
             </Button>
           </ModalFooter>

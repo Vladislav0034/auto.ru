@@ -15,25 +15,25 @@ export const getAutosThunk = createAsyncThunk<ApiResponce>(
     });
 
 
-/* export const createTaskThunk = createAsyncThunk<TaskType, TaskDataType>('tasks/create',
+ export const createAutoThunk = createAsyncThunk<AutoType, AutoDataType>('autos/create',
     async (data) => {
-    const task = await TaskService.addTask(data);
-    return task;
+    const auto = await AutoService.addAuto(data);
+    return auto;
     });
     
 
-export const deleteTaskThunk = createAsyncThunk<TaskType['id'], TaskType['id']>('tasks/delete',
+export const deleteAutoThunk = createAsyncThunk<AutoType['id'], AutoType['id']>('autos/delete',
     async (id) => {
-        await TaskService.deleteTask(id);
+        await AutoService.deleteAuto(id);
         return id;
 });
 
 
 
-export const editTaskThunk = createAsyncThunk<TaskType, EditTaskType>(
+export const editAutoThunk = createAsyncThunk<AutoType, EditAutoType>(
     'tasks/edit',
     async ({ id, data }) => {
-      const task = await TaskService.editTask(id, data);
-      return task;
+      const auto = await AutoService.editAuto(id, data);
+      return auto;
     }
-);  */
+);  

@@ -2,7 +2,8 @@ const authRouter = require('express').Router();
 const bcrypt = require('bcrypt');
 const { User } = require('../../db/models');
 const generateTokens = require('../utils/generateTokens');
-const cookieConfig = require('../configs/cookie.config').default;
+const cookieConfig = require('../configs/cookie.config');
+
 
 authRouter.post('/signup', async (req, res) => {
   const { email, name, password } = req.body;
@@ -16,7 +17,6 @@ authRouter.post('/signup', async (req, res) => {
       where: { email },
       defaults: { name, password: await bcrypt.hash(password, 10) },
     });
-
     if (!created) {
       return res.status(400).json({ error: 'User already exists' });
     }
@@ -45,7 +45,6 @@ authRouter.post('/signin', async (req, res) => {
     if (!user) {
       return res.status(400).json({ error: 'Не верный логин или пароль' });
     }
-
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {

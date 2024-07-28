@@ -7,11 +7,11 @@ import useTasks from '../hooks/useAutos';
 
 
 export default function MainPage():JSX.Element {
-  const { TasksSubmitHandler, autos, deleteHandler, editHandler } = useTasks();
+  const { AutosSubmitHandler, autos, deleteHandler, editHandler } = useTasks();
 
   return (
     <>
-    <AutoForm TasksSubmitHandler={TasksSubmitHandler}/>
+    <AutoForm AutosSubmitHandler={AutosSubmitHandler}/>
     <SimpleGrid columns={3} spacing={5}>
       {autos.map((el) => (<AutoCard auto={el} key={el.id} deleteHandler={deleteHandler}
       editHandler={editHandler}/>))}

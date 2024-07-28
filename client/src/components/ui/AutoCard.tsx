@@ -30,17 +30,19 @@ import {
   
   export default function AutoCard({ auto, deleteHandler, editHandler }: AutoCardTypes): JSX.Element {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    /* const [editName, setEditName] = useState(task.name);
-    const [editDescription, setEditDescription] = useState(task.description);
-    const [editDeadlines, setEditDeadlines] = useState(task.deadlines);
-    const [editImage, setEditImage] = useState(task.image);
-    const [editStatus, setEditStatus] = useState(task.status);*/
+     const [editmodelCar, setEditmodelCar] = useState(auto.modelCar);
+    const [edityearCar, setEdityearCar] = useState(auto.yearCar);
+    const [editmileage, setEditmileage] = useState(auto.mileage);
+    const [editimage, setEditimage] = useState(auto.image);
+    const [editcost, setEditcost] = useState(auto.cost);
+    const [editdescription, setEditdescription] = useState(auto.description);
 
   
-    /* const handleSave = () => {
-      editHandler({ id: task.id, data: { name: editName, description: editDescription, deadlines: editDeadlines, status: editStatus, image: editImage } });
+     const handleSave = () => {
+      editHandler({ id: auto.id, data: { 
+        modelCar: editmodelCar, yearCar: edityearCar, mileage: editmileage, image: editimage, cost: editcost, description: editdescription } });
       onClose();
-    }; */
+    }; 
   
     return (
       <Card maxW="sm" backgroundColor="rgba(212, 207, 207, 0.5)">
@@ -53,9 +55,10 @@ import {
           borderTopLeftRadius="lg"
           borderTopRightRadius="lg" />
             <Heading size="md">{auto.modelCar}</Heading>
-            <Text>{auto.description}</Text>
+            <Text>{auto.yearCar}</Text>
+            <Text>{auto.mileage}</Text>
             <Text>{auto.cost}</Text>
-            <Text color="blue.600" fontSize="2xl">
+            <Text color="blue.600" fontSize="1xl">
               {auto.description} 
             </Text>
           </Stack>
@@ -67,34 +70,39 @@ import {
               <ModalBody>
                 <Stack spacing={3}>
                   <Input
-                    //value={editName}
-                    //onChange={(e) => setEditName(e.target.value)}
-                    placeholder="Редактировать задачу"
+                    value={editmodelCar}
+                    onChange={(e) => setEditmodelCar(e.target.value)}
+                    placeholder="Измените модель"
                   />
                   <Input
-                   // value={editImage}
-                    //onChange={(e) => setEditImage(e.target.value)}
-                    placeholder="Редактировать URL изображения"
+                    value={editimage}
+                    onChange={(e) => setEditimage(e.target.value)}
+                    placeholder="Измените фото"
                   />
                   <Input
-                    //value={editStatus.toString()}
-                   // onChange={(e) => setEditStatus(e.target.value)}
-                    placeholder="Редактировать статус"
+                    value={edityearCar}
+                    onChange={(e) => setEdityearCar(e.target.value)}
+                    placeholder="Измените год"
                   />
                   <Input
-                   // value={editDescription.toString()}
-                    //onChange={(e) => setEditDescription(e.target.value)}
-                    placeholder="Редактировать описание задачи"
+                    value={editdescription.toString()}
+                    onChange={(e) => setEditdescription(e.target.value)}
+                    placeholder="Добавте описание"
                   />
                   <Input
-                   // value={editDeadlines.toString()}
-                   // onChange={(e) => setEditDeadlines(e.target.value)}
-                    placeholder="Редактировать dealine"
+                    value={editcost.toString()}
+                    onChange={(e) => setEditcost(e.target.value)}
+                    placeholder="Измените цену"
+                  />
+                   <Input
+                    value={editmileage.toString()}
+                    onChange={(e) => setEditmileage(e.target.value)}
+                    placeholder="Измените пробег"
                   />
                 </Stack>
               </ModalBody>
               <ModalFooter>
-                <Button colorScheme="blue" mr={3} /* onClick={handleSave} */ >
+                <Button colorScheme="red" mr={3}  onClick={handleSave}  >
                   ОК
                 </Button>
                 <Button variant="outline" onClick={onClose}>
@@ -110,7 +118,7 @@ import {
           <Button onClick={onOpen} variant="outline" colorScheme="gray">
               Редактировать
             </Button>
-            <Button /* onClick={() => deleteHandler(auto.id)} */ variant="outline" colorScheme="red">
+            <Button  onClick={() => deleteHandler(auto.id)}  variant="outline" colorScheme="red">
               Удалить
             </Button>
           </ButtonGroup>

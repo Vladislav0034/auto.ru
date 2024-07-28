@@ -1,29 +1,43 @@
-import React from 'react';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import MainPage from './components/pages/MainPage';
-import AccountPage from './components/pages/AccountPage';
+import React, { useEffect } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './components/Layout';
+import AccountPage from './components/pages/AccountPage';
+import MainPage from './components/pages/MainPage';
+import SignInPage from './components/pages/SignInPage';
+import SignUpPage from './components/pages/SignUpPage';
+import { useAppDispatch } from './components/hooks/reduxHooks';
+import { checkUserThunk } from './redux/auth/authActionThunk';
 
 
 function App(): JSX.Element {
-  
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    void dispatch(checkUserThunk());
+  }, []);
+
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Layout/>,
+      element: <Layout />,
       children: [
         {
           path: '/',
-          element: <MainPage/>,
+          element: <MainPage />,
         },
         {
           path: '/account',
-          element: <AccountPage/>,
+          element: <AccountPage />,
         },
-      ]
+        {
+          path: '/signin',
+          element: <SignInPage />,
+        },
+        {
+          path: 'signup',
+          element: <SignUpPage />,
+        },
+      ],
     },
   ]);
   return <RouterProvider router={router} />;

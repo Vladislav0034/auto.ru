@@ -11,6 +11,20 @@ class AutoService {
         const {data} = await this.api.get<ApiResponce>('/autos');
         return AutosSchema.parse(data);
     }
+
+    async addAuto(obj: AutoDataType): Promise<AutoType> {
+        const {data} = await this.api.post<AutoType>('/autos', obj);
+        return AutoSchema.parse(data);
+    }
+
+    async deleteAuto(id: number): Promise<ApiResponce> {
+        return this.api.delete(`/autos/${id}`);
+}
+
+async editAuto(id: number, obj: AutoDataType): Promise<AutoType> {
+    const { data } = await this.api.patch<AutoType>(`/autos/${id}`, obj);
+    return AutoSchema.parse(data);
+  }
 }
 
 export default new AutoService(apiInstance);
