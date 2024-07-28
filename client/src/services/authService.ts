@@ -1,6 +1,6 @@
 import type { AxiosInstance, AxiosResponse } from 'axios';
 import apiInstance from './apiInstance';
-import type { UserFromBackendType, UserSignInType, UserSignUpType } from '../types/userTypes';
+import type { UserFromBackendType, UserSignInType, UserSignUpType, UserUpdateImageType } from '../types/userTypes';
 
 class AuthService {
   constructor(private readonly api: AxiosInstance) {}
@@ -18,6 +18,11 @@ class AuthService {
   async checkUser(): Promise<UserFromBackendType> {
     const { data } = await this.api<UserFromBackendType>('/tokens/refresh');
     setTimeout(() => {})
+    return data;
+  }
+
+  async updateUser(userData: UserUpdateImageType): Promise<UserFromBackendType> {
+    const { data } = await this.api.patch<UserFromBackendType>('/users', userData);
     return data;
   }
 

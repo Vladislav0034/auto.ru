@@ -1,5 +1,5 @@
 import React from 'react';
-import { SimpleGrid } from '@chakra-ui/react';
+import { SimpleGrid, Box, Button } from '@chakra-ui/react';
 import AutoCard from '../ui/AutoCard';
 import AutoForm from '../ui/AutoForm';
 import useAutos from '../hooks/useAutos';
@@ -15,6 +15,9 @@ export default function AccountPage(): JSX.Element {
   return (
     <>
       <AutoForm AutosSubmitHandler={AutosSubmitHandler} />
+      <Box display="flex" justifyContent="flex-end" mb={4}>
+        <Button mt={0}>Edit Account</Button>
+      </Box>
       <SimpleGrid columns={3} spacing={5}>
         {userAutos.map((el) => (
           <AutoCard

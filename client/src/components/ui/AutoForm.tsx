@@ -29,12 +29,12 @@ export default function AutoForm({ AutosSubmitHandler }: PropsType): JSX.Element
 
   return (
     <>
-      <Button onClick={openModal} colorScheme="red" mt={8} mb={8}>Добавить автомобиль</Button>
+      <Button onClick={openModal} colorScheme="red" mt={15} mb={8}>Добавить автомобиль</Button>
 
       <Modal isOpen={isOpen} onClose={closeModal}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Добавить новую задачу</ModalHeader>
+          <ModalHeader>Добавить новый автомобиль</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Box onSubmit={wrappedAutosSubmitHandler} as="form" mt={3}>

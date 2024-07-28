@@ -57,7 +57,7 @@ export default function SignInPage(): JSX.Element {
             </Text>
           </FormControl>
 
-          <Button type="submit" colorScheme="blue" w="full" mt={4}>
+          <Button type="submit" colorScheme="red" w="full" mt={4}>
             sign in
           </Button>
         </VStack>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   Box, 
   Flex, 
@@ -16,14 +16,25 @@ import {
   Breadcrumb, 
   BreadcrumbItem, 
   BreadcrumbLink, 
-  Avatar 
+  Avatar,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Input
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { logoutThunk } from '../../redux/auth/authActionThunk';
+import useAuth from '../hooks/useAuth';
+
 
 const Links = ['Dashboard', 'Projects', 'Team'];
+
 
 function Nlink({ to, children, ...props }: { to: string; children: React.ReactNode; onClick?: () => void }): JSX.Element {
   return (
@@ -49,6 +60,24 @@ export default function NavBar(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.auth.user);
+  const { updateUserHandler } = useAuth();
+  const [newImage, setNewImage] = useState<string>('');
+  const {
+    isOpen: isModalOpen,
+    onOpen: onModalOpen,
+    onClose: onModalClose,
+  } = useDisclosure();
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewImage(e.target.value);
+  };
+
+  const handleImageUpdate = () => {
+    if (user.status === 'logged') {
+      updateUserHandler({ userId: user.id, newImage });
+      onModalClose();
+    }
+  };
   
   useEffect(() => {
     if (user.status === 'logged') {
@@ -100,11 +129,11 @@ export default function NavBar(): JSX.Element {
           <Flex alignItems="center">
             <Menu>
               <MenuButton as={Button} rounded="full" variant="link" cursor="pointer" minW={0}>
-                <Avatar size="sm" />
+                <Avatar size="sm" src={user.image} />
               </MenuButton>
               <MenuList>
                 <MenuItem>Profile</MenuItem>
-                <MenuItem>Settings</MenuItem>
+                <MenuItem onClick={onModalOpen}>Edit photo</MenuItem>
                 <MenuDivider />
                 <MenuItem onClick={logoutHandler}>Logout</MenuItem>
               </MenuList>
@@ -130,6 +159,30 @@ export default function NavBar(): JSX.Element {
           </Stack>
         </Box>
       )}
+      
+      <Modal isOpen={isModalOpen} onClose={onModalClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Update Profile Picture</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Input
+              placeholder="Enter new image URL"
+              value={newImage}
+              onChange={handleImageChange}
+            />
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onModalClose}>
+              Close
+            </Button>
+            <Button variant="ghost" onClick={handleImageUpdate}>
+              Save
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      
     </Box>
   );
 }

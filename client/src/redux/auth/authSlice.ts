@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { UserStateType } from '../../types/userTypes';
-import { checkUserThunk, logoutThunk, signInThunk, signUpThunk } from './authActionThunk';
+import { checkUserThunk, logoutThunk, signInThunk, signUpThunk, updateUserThunk } from './authActionThunk';
 
 export type InitStateType = {
   accessToken: string;
@@ -43,6 +43,10 @@ const authSlice = createSlice({
     builder.addCase(logoutThunk.fulfilled, (state) => {
       state.accessToken = '';
       state.user = { status: 'guest' };
+    })
+    builder.addCase(updateUserThunk.fulfilled, (state, { payload }) => {
+      state.accessToken = payload.accessToken;
+      state.user = { status: 'logged', ...payload.user };
     })
   },
 });

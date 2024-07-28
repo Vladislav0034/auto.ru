@@ -9,11 +9,13 @@ module.exports = {
       name: 'Том Круз',
       email: "Tom@mail.ru",
       password: await bcrypt.hash('123', 10),
+      image: 'https://avatars.mds.yandex.net/get-entity_search/1634327/877105605/SUx182',
       },
       {
         name: 'Владислав Песков',
         email: "xfemidax@mail.ru",
         password: await bcrypt.hash('123', 10),
+        image: 'https://avatars.mds.yandex.net/i?id=f1bbaea517c60f31aad0aa8d5bbbd214f973919f-10350400-images-thumbs&n=13',
         }
     ], {});
     await queryInterface.bulkInsert(

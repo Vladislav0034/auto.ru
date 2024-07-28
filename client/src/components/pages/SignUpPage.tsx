@@ -68,7 +68,7 @@ export default function SignUpPage(): JSX.Element {
             </Text>
           </FormControl>
 
-          <Button type="submit" colorScheme="blue" w="full" mt={4}>
+          <Button type="submit" colorScheme="red" w="full" mt={4}>
             Create Account
           </Button>
         </VStack>

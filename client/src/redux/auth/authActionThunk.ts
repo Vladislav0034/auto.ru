@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { AxiosResponse } from 'axios';
-import type { UserFromBackendType, UserSignInType, UserSignUpType } from '../../types/userTypes';
+import type { UserFromBackendType, UserSignInType, UserSignUpType, UserType, UserUpdateImageType } from '../../types/userTypes';
 import authService from '../../services/authService';
 
 export const signInThunk = createAsyncThunk<UserFromBackendType, UserSignInType>(
@@ -25,4 +25,9 @@ export const checkUserThunk = createAsyncThunk<UserFromBackendType>(
         authService.checkUser().then(resolve).catch(reject);
       }, 1000);
     }),
-);
+  );
+
+  export const updateUserThunk = createAsyncThunk<UserFromBackendType, UserUpdateImageType>(
+    'auth/updateUser',
+    async (userData) => authService.updateUser(userData),
+  );
